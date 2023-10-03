@@ -843,7 +843,8 @@ ul.wmuSliderPagination {
 }
 .slider-side-social-right-grid{
 	padding:.77em;
-	background:#55acee;
+	background:#474954;
+	/* 原本#55acee */
 }
 .slider-side-social-right-grid:nth-child(2){
 	background:#ff8833;
@@ -857,7 +858,8 @@ ul.wmuSliderPagination {
 	width:50%;
 }
 .slider-side-social-right-twitter span{
-	background:url(../images/img-sp.png)no-repeat -13px -217px;
+	/* background:url(../images/copper.png); */
+	/* 原本background:url(../images/img-sp.png)no-repeat -13px -217px; */
 	display:block;
 	width:50px;
 	height:50px;

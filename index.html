@@ -11,7 +11,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="人生Online, 成就系統, 生產工具" />
+<meta name="keywords" content="人生Online, 激勵系統, 成就系統, 生產工具" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //for-mobile-apps -->
@@ -42,7 +42,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- 測試Vue -->
 	<!-- <div id="app">{{ message }}</div> -->
 	<div class="smart-main">
-		<h6 class="title">人生Online之成就系統</h6>
+		<h6 class="title">人生Online之激勵系統</h6>
 
 <!-- navigation -->
 		<div class="navigation">
@@ -63,10 +63,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
 						<nav class="menu menu--sebastian">
 							<ul class="nav navbar-nav menu__list">
-								<li class="menu__item menu__item--current"><a href="index.html" class="menu__link">Home</a></li>
-								<li class="menu__item"><a href="index.html" class="menu__link">About Us</a></li>
-								<li class="menu__item"><a href="index.html" class="menu__link">Blog</a></li>
-								<li class="menu__item"><a href="index.html" class="menu__link">Mail Us</a></li>
+								<li class="menu__item menu__item--current"><a href="index.html" class="menu__link">首頁</a></li>
+
+								<li class="menu__item"><a href="achievementSystem.html" class="menu__link">成就系統</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -87,7 +86,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="dark-area">
 			<!-- some colors -->
 				<div id="lightcircle" class="c100 p60 dark big">
-					<span>{{(taskComplete / allTasks * 100).toFixed(0)}}%
+					<span>{{percentageOfTaskComplete}}
 					</span>
 					<div class="slice">
 						<div class="bar"></div>
@@ -96,8 +95,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 
 				<div class="slider-side-social-right">
-					<div class="slider-side-social-right-grid">
-						<div class="slider-side-social-right-twitter">
+					<div :style="rankBackground" class="slider-side-social-right-grid">
+						<div :style="rankPicture" class="slider-side-social-right-twitter">
 							<span></span>
 						</div>
 						<div class="slider-side-social-right-twitterr">
@@ -166,30 +165,39 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<ul id="myList">
 					<li>
 						<!-- 成就清單 -->
-						
-						<div class="l_g">
+						<div id="listOfAchievements" class="l_g">
 							<p>
-								<input type="checkbox" id="早睡" value="早睡" v-model="checkedTasks">
+								<input type="checkbox" id="早睡" value="早睡" v-model="checkedTasks" @click="play_soundEffects_click01">
 								<label for="早睡">早睡</label>
 							</p>
 
 							<p class="act1">
-								<input type="checkbox" id="早起" value="早起" v-model="checkedTasks">
+								<input type="checkbox" id="早起" value="早起" v-model="checkedTasks" @click="play_soundEffects_click01">
 								<label for="早起">早起</label>
 							</p>
 
 							<p>
-								<input type="checkbox" id="出門走走，提升士氣" value="出門走走，提升士氣" v-model="checkedTasks">
+								<input type="checkbox" id="出門走走，提升士氣" value="出門走走，提升士氣" v-model="checkedTasks" @click="play_soundEffects_click01">
 								<label for="出門走走，提升士氣">出門走走，提升士氣</label>
 							</p>
 
 							<p class="act1">
-								<input type="checkbox" id="找人聊天，提升士氣" value="找人聊天，提升士氣" v-model="checkedTasks">
+								<input type="checkbox" id="找人聊天，提升士氣" value="找人聊天，提升士氣" v-model="checkedTasks" @click="play_soundEffects_click01">
 								<label for="找人聊天，提升士氣">找人聊天，提升士氣</label>
 							</p>
 
 							<p>
-								<input type="checkbox" id="其他任務" :value='otherTask' v-model="checkedTasks" placeholder="新增其他任務">
+								<input type="checkbox" id="確認成就清單1/2" value="確認成就清單1/2" v-model="checkedTasks" @click="play_soundEffects_click01">
+								<label for="確認成就清單1/2">確認成就清單1/2</label>
+							</p>
+
+							<p class="act1">
+								<input type="checkbox" id="確認成就清單2/2" value="確認成就清單2/2" v-model="checkedTasks" @click="play_soundEffects_click01">
+								<label for="確認成就清單2/2">確認成就清單2/2</label>
+							</p>							
+
+							<p>
+								<input type="checkbox" id="其他任務" :value='otherTask' v-model="checkedTasks" @click="play_soundEffects_click01" placeholder="新增其他任務">
 								<!-- Bug：placeholder無法顯示 -->
 								<label for="其他任務"><input type="text" v-model="otherTask"></label>
 							</p>
@@ -207,7 +215,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<a href="#" id="">按鈕1</a>
 					</div>
 					<div class="calendar-bottom-gridl1">
-						<a href="#" id="">按鈕2</a>
+						<a href="achievementSystem.html" id="">觀看成就</a>
 					</div>
 					<div class="clearfix"> </div>
 				</div>
