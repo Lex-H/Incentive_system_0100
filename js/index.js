@@ -37,13 +37,13 @@ createApp({
     rankPicture() {
       var percentage = (this.taskComplete / this.allTasks * 100).toFixed(0);
       if (percentage >= 100) {
-        return 'background:url(../images/master.png);'
+        return 'background:url(images/master.png);'
       }else if (percentage >= 70) {
-        return 'background:url(../images/gold.png);'
+        return 'background:url(images/gold.png);'
       }else if (percentage >= 40) {
-        return 'background:url(../images/silver.png);'
+        return 'background:url(images/silver.png);'
       }else {
-        return 'background:url(../images/copper.png);'
+        return 'background:url(images/copper.png);'
       }
     }
   },
