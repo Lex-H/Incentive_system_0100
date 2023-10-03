@@ -32,9 +32,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!--//skycons-icons-->
 <link href='//fonts.googleapis.com/css?family=Bitter:400,400italic,700' rel='stylesheet' type='text/css'>
 
+<!-- 以下是我建立的js -->
+<!-- 導入Vue -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
 </head>
 	
-<body>
+<body id="app">
+	<!-- 測試Vue -->
+	<!-- <div id="app">{{ message }}</div> -->
 	<div class="smart-main">
 		<h6 class="title">人生Online之成就系統</h6>
 
@@ -76,15 +82,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- //navigation -->
 
 <!-- map-buttons -->
-
-
-
 <div class="map-buttons">
 	<div class="map-buttons-right">
 		<div class="dark-area">
 			<!-- some colors -->
 				<div id="lightcircle" class="c100 p60 dark big">
-					<span>60%</span>
+					<span>{{(taskComplete / allTasks * 100).toFixed(0)}}%
+					</span>
 					<div class="slice">
 						<div class="bar"></div>
 						<div class="fill"></div>
@@ -97,7 +101,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<span></span>
 						</div>
 						<div class="slider-side-social-right-twitterr">
-							<p>12件</p>
+							<p>{{ taskComplete }}</p>
 							<h4>完成任務</h4>
 						</div>
 						<div class="clearfix"> </div>
@@ -107,7 +111,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<span></span>
 						</div>
 						<div class="slider-side-social-right-twitterr">
-							<p>20件</p>
+							<p>{{ allTasks }}件</p>
 							<h4>全部任務</h4>
 						</div>
 						<div class="clearfix"> </div>
@@ -122,8 +126,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div class="clearfix"> </div>
 </div>
 <!-- //map-buttons -->
-
-
 
 <!-- calender-show-more -->
 	<div class="calender-show-more">
@@ -163,53 +165,37 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</script>
 				<ul id="myList">
 					<li>
+						<!-- 成就清單 -->
+						<div>測試，勾選的項目: {{ checkedTasks }}</div>
 						<div class="l_g">
-								<p class="act">
-									<input type="checkbox">
-									<a href="#">
-										<span>
-											測試測試測試測試測試測試
-										</span>
-									</a>
-								</p>
+							<p>
+								<input type="checkbox" id="早睡" value="早睡" v-model="checkedTasks">
+								<label for="早睡">早睡</label>
+							</p>
 
-								<p class="act1">
-									<input type="checkbox">
-									<a href="#">
-										<span>
-											測試測試測試測試測試測試
-										</span>
-									</a>
-								</p>
+							<p class="act1">
+								<input type="checkbox" id="早起" value="早起" v-model="checkedTasks">
+								<label for="早起">早起</label>
+							</p>
 
-								<p>
-									<input type="checkbox">
-									<a href="#">
-										<span>
-											測試測試測試測試測試測試
-										</span>
-									</a>
-								</p>
+							<p>
+								<input type="checkbox" id="出門走走，提升士氣" value="出門走走，提升士氣" v-model="checkedTasks">
+								<label for="出門走走，提升士氣">出門走走，提升士氣</label>
+							</p>
 
-								<p>
-									<input type="checkbox">
-									<a href="#">
-										<span>
-											測試測試測試測試測試測試
-										</span>
-									</a>
-								</p>
+							<p class="act1">
+								<input type="checkbox" id="找人聊天，提升士氣" value="找人聊天，提升士氣" v-model="checkedTasks">
+								<label for="找人聊天，提升士氣">找人聊天，提升士氣</label>
+							</p>
 
-								<p>
-									<input type="checkbox">
-									<a href="#">
-										<span>
-											測試測試測試測試測試測試
-										</span>
-									</a>
-								</p>
+							<p>
+								<input type="checkbox" id="其他任務" :value='otherTask' v-model="checkedTasks" placeholder="新增其他任務">
+								<!-- Bug：placeholder無法顯示 -->
+								<label for="其他任務"><input type="text" v-model="otherTask"></label>
+							</p>
 
-						</div>
+
+						</div>						
 					</li>
 					
 					
@@ -239,4 +225,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 <script src="js/bootstrap.js"></script>
 </body>
+
+<!-- 以下是我建立的JS，為了使Vue生效，放在最底下 -->
+<script type="text/javascript" src="js/index.js"></script>
 </html>
