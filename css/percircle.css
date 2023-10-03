@@ -52,8 +52,10 @@
   margin: 0 auto;
 }
 .c100.big {
-  font-size: 240px;
-  margin-left: 0.2em;
+  font-size: 170px;
+  /* 原本240px */
+  margin-left: 0.1em;
+  /* 原本0.2em */
 }
 .c100.small {
 	margin-left: 0.25em;
@@ -197,12 +199,14 @@
 .clearfix {*zoom: 1;}
 @media (max-width:991px){
 	.c100.big {
-		margin-left: 0.1em;
+		margin-left: 0.05em;
+    /* 原本0.1em */
 	}
 }
 @media (max-width:800px){
 	.c100.big {
-		font-size: 165px;
+		font-size: 145px;
+    /* 原本是165px */
 	}
 }
 @media (max-width:768px){
@@ -220,7 +224,8 @@
 }
 @media (max-width:320px){
 	.c100.big {
-		font-size: 135px;
+		font-size: 105px;
+    /* 原本是135px */
 	}
 	.c100 {
 		font-size: 90px;

@@ -1329,7 +1329,8 @@ option {
 }
 /*-- //map --*/
 .map-buttons-right{
-	float: right;
+	float: left;
+	/* 原本right */
     width: 49%;
     background: #FFF;
     padding: 2.05em;
