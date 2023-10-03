@@ -1,0 +1,201 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<title>人生Online之成就系統</title>
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="人生Online, 成就系統, 生產工具" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- //for-mobile-apps -->
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- js -->
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<!-- //js -->
+<link rel="stylesheet" href="css/clndr.css" type="text/css" />
+<link rel="stylesheet" href="css/percircle.css">
+<link href="css/fabochart.css" rel="stylesheet" type="text/css">
+<!-- player -->
+<link href="css/acornmediaplayer.base.css" rel="stylesheet" type="text/css">
+<link href="acornmediaplayer/acorn.access.css" rel="stylesheet" type="text/css">
+<!-- //player -->
+<!--skycons-icons-->
+<script src="js/skycons.js"></script>
+<!--//skycons-icons-->
+<link href='//fonts.googleapis.com/css?family=Bitter:400,400italic,700' rel='stylesheet' type='text/css'>
+
+</head>
+	
+<body>
+	<div class="smart-main">
+		<h6 class="title">人生Online之成就系統</h6>
+
+<!-- navigation -->
+		<div class="navigation">
+			
+			<div class="top-nav">
+				<nav class="navbar navbar-default">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+					  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					  </button>
+					</div>
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+						<nav class="menu menu--sebastian">
+							<ul class="nav navbar-nav menu__list">
+								<li class="menu__item menu__item--current"><a href="index.html" class="menu__link">Home</a></li>
+								<li class="menu__item"><a href="index.html" class="menu__link">About Us</a></li>
+								<li class="menu__item"><a href="index.html" class="menu__link">Blog</a></li>
+								<li class="menu__item"><a href="index.html" class="menu__link">Mail Us</a></li>
+							</ul>
+						</nav>
+					</div>
+					<!-- /.navbar-collapse -->
+				</nav>
+			</div>
+			<!--//navbar-collapse-->
+						
+			
+			
+			<div class="clearfix"> </div>
+		</div>
+<!-- //navigation -->
+
+<!-- calender-show-more -->
+	<div class="calender-show-more">
+		<div class="calender-show-more-left">
+			<div class="calender-lft">
+				<div class="calender-left1">
+					<h3><span></span>成就清單</h3>
+				</div>
+				<div class="options">
+					<select id="country" onchange="change_country(this.value)" class="frm-field required dropdown">
+						<option value="null">選項1</option>
+						<option value="null">選項2</option>         
+						<option value="AX">選項3</option>
+						<option value="AX">選項4</option>
+						<option value="AX">選項5</option>
+					</select>
+				</div>
+					<div class="clearfix"> </div>
+					<div class="close"> </div>
+			</div>
+			<div class="calendar-bottom">
+				<div class="load_more">	
+				<script>
+					$(document).ready(function () {
+						size_li = $("#myList li").size();
+						x=2;
+						$('#myList li:lt('+x+')').show();
+						$('#loadMore').click(function () {
+							x= (x+1 <= size_li) ? x+1 : size_li;
+							$('#myList li:lt('+x+')').show();
+						});
+						$('#showLess').click(function () {
+							x=(x-1<0) ? 1 : x-1;
+							$('#myList li').not(':lt('+x+')').hide();
+						});
+					});
+				</script>
+				<ul id="myList">
+					<li>
+						<div class="l_g">
+								<p>
+									<input type="checkbox">
+									<a href="#">
+										<span>
+											測試測試測試測試測試測試
+										</span>
+									</a>
+								</p>
+
+								<p class="act">
+									<input type="checkbox">
+									<a href="#">
+										<span>
+											測試測試測試測試測試測試
+										</span>
+									</a>
+								</p>
+
+								<p class="act1">
+									<input type="checkbox">
+									<a href="#">
+										<span>
+											測試測試測試測試測試測試
+										</span>
+									</a>
+								</p>
+
+								<p>
+									<input type="checkbox">
+									<a href="#">
+										<span>
+											測試測試測試測試測試測試
+										</span>
+									</a>
+								</p>
+
+								<p>
+									<input type="checkbox">
+									<a href="#">
+										<span>
+											測試測試測試測試測試測試
+										</span>
+									</a>
+								</p>
+
+								<p>
+									<input type="checkbox">
+									<a href="#">
+										<span>
+											測試測試測試測試測試測試
+										</span>
+									</a>
+								</p>
+
+						</div>
+					</li>
+					
+					
+					
+				</ul>
+				</div>
+				<div class="calendar-bottom-grid">
+					<div class="calendar-bottom-gridl">
+						<a href="#" id="">按鈕1</a>
+					</div>
+					<div class="calendar-bottom-gridl1">
+						<a href="#" id="">按鈕2</a>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="clearfix"> </div>
+	</div>
+<!-- //calender-show-more -->
+
+
+	<div class="footer">
+			<p>© 2016 Smart Ui Kit. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+	</div>
+	</div>
+<script src="js/bootstrap.js"></script>
+</body>
+</html>
