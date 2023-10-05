@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-<title>人生Online之激勵系統 1.0</title>
+<title>人生Online之激勵系統 6.0 beta</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -42,7 +42,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- 測試Vue -->
 	<!-- <div id="app">{{ message }}</div> -->
 	<div class="smart-main">
-		<h6 class="title">人生Online之激勵系統</h6>
+		<h6 class="title">人生激勵系統</h6>
+		<h6 class="title">試用版，請勿輸入任何敏感資料，請只用於測試</h1>
 
 <!-- navigation -->
 		<div class="navigation">
@@ -110,7 +111,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<span></span>
 						</div>
 						<div class="slider-side-social-right-twitterr">
-							<p>{{ allTasks }}件</p>
+							<p>{{ NumberOfAllTasks }}件</p>
 							<h4>全部任務</h4>
 						</div>
 						<div class="clearfix"> </div>
@@ -167,8 +168,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<!-- 成就清單 -->
 						<div id="listOfAchievements" class="l_g">
 							<p>
-								<input type="checkbox" id="早睡" value="早睡" v-model="checkedTasks" @click="play_soundEffects_click01">
-								<label for="早睡">早睡</label>
+								<input type="checkbox" id="試用版，請勿輸入任何敏感資料，請只用於測試" value="試用版，請勿輸入任何敏感資料，請只用於測試" v-model="checkedTasks" @click="play_soundEffects_click01">
+								<label for="試用版，請勿輸入任何敏感資料，請只用於測試">試用版，請勿輸入任何敏感資料，請只用於測試</label>
 							</p>
 
 							<p class="act1">

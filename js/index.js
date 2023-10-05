@@ -4,7 +4,9 @@ createApp({
   data() {
     return {
         checkedTasks: [],
-        otherTask: '',
+        allTasks: [],
+        otherTask: [],
+        
     }
   },
   computed: {
@@ -13,17 +15,17 @@ createApp({
       // `this` points to the component instance
       return this.checkedTasks.length
     },
-    allTasks() {
+    NumberOfAllTasks() {
         // `this` points to the component instance
         // 這個有點複雜，先寫固定數字，後面再變成計算的
         return 6
     },
     percentageOfTaskComplete() {
-      var percentage = (this.taskComplete / this.allTasks * 100).toFixed(0);
+      var percentage = (this.taskComplete / this.NumberOfAllTasks * 100).toFixed(0);
       return percentage + '%'
     },
     rankBackground() {
-      var percentage = (this.taskComplete / this.allTasks * 100).toFixed(0);
+      var percentage = (this.taskComplete / this.NumberOfAllTasks * 100).toFixed(0);
       if (percentage >= 100) {
         return 'background:#F26DF9;'
       }else if (percentage >= 70) {
@@ -35,7 +37,7 @@ createApp({
       }
     },
     rankPicture() {
-      var percentage = (this.taskComplete / this.allTasks * 100).toFixed(0);
+      var percentage = (this.taskComplete / this.NumberOfAllTasks * 100).toFixed(0);
       if (percentage >= 100) {
         return 'background:url(images/master.png);'
       }else if (percentage >= 70) {
