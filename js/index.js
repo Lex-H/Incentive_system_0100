@@ -187,6 +187,10 @@ createApp({
     //     return i.taskContent
     //   }
     // },
+    playBackGroundMusic() {
+      console.log('播放背景樂')
+      document.getElementById('backGroundMusicPlayer').play();
+    },
     testPlus() {
       this.test.splice(0, 1)
     },

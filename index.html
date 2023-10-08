@@ -40,7 +40,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 	
 <body id="app">
-	<div class="smart-main">
+	<div class="smart-main" @click.once="playBackGroundMusic">
 		<h6 class="title">人生Online7.X 激勵系統 beta
 		</h6>
 		<h6 class="title">試用版，請勿輸入任何敏感資料，請只用於測試</h1>
@@ -69,7 +69,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<li class="menu__item"><a href="achievementSystem.html" class="menu__link">成就系統</a></li>
 
 								<li class="menu__item"><div class="menu__link">
-									<audio controls loop :src="backGroundMusic"></audio>
+									<audio id="backGroundMusicPlayer" controls loop :src="backGroundMusic"></audio>
 								</div></li>
 							</ul>
 						</nav>
