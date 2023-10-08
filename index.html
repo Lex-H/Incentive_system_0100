@@ -7,7 +7,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html>
 <head>
-<title>人生Online之激勵系統 6.0 beta</title>
+<title>人生Online7.X 激勵系統 beta
+</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -39,10 +40,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </head>
 	
 <body id="app">
-	<!-- 測試Vue -->
-	<!-- <div id="app">{{ message }}</div> -->
 	<div class="smart-main">
-		<h6 class="title">人生激勵系統</h6>
+		<h6 class="title">人生Online7.X 激勵系統 beta
+		</h6>
 		<h6 class="title">試用版，請勿輸入任何敏感資料，請只用於測試</h1>
 
 <!-- navigation -->
@@ -67,6 +67,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<li class="menu__item menu__item--current"><a href="index.html" class="menu__link">首頁</a></li>
 
 								<li class="menu__item"><a href="achievementSystem.html" class="menu__link">成就系統</a></li>
+
+								<li class="menu__item"><div class="menu__link">
+									<audio controls autoplay loop :src="backGroundMusic"></audio>
+								</div></li>
 							</ul>
 						</nav>
 					</div>
@@ -163,57 +167,61 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						});
 					});
 				</script>
-				<ul id="myList">
-					<li>
-						<!-- 成就清單 -->
-						<div id="listOfAchievements" class="l_g">
-							<p>
-								<input type="checkbox" id="試用版，請勿輸入任何敏感資料，請只用於測試" value="試用版，請勿輸入任何敏感資料，請只用於測試" v-model="checkedTasks" @click="play_soundEffects_click01">
-								<label for="試用版，請勿輸入任何敏感資料，請只用於測試">試用版，請勿輸入任何敏感資料，請只用於測試</label>
-							</p>
+				<!-- 新成就清單 -->
+				<ul id="ListOfAchievement">
+					<!-- test：{{ test }}<br> -->
+					全部任務：{{ allTasks }}<br>
+					完成任務：{{ checkedTasks }}
+					<p>渲染列表</p>
+					<!-- 渲染列表 -->
 
-							<p class="act1">
-								<input type="checkbox" id="早起" value="早起" v-model="checkedTasks" @click="play_soundEffects_click01">
-								<label for="早起">早起</label>
-							</p>
+					<div v-for="i in allTasks">
+						<div :id="i.taskNumber">
+							<input
+							type="checkbox"
+							:value="i.taskNumber"
+							v-model="i.doneOrNot"
+							@click="checkboxClicked"
+							>
+							<span
+							@click="ClickX"
+							> X </span>
+							<span :style="i.contentDisplay"
+							@click="clickListContent(i)">
+								{{ i.taskContent }}
+							</span>
+							<input
+							@blur="LeaveInput(i)"
+							v-model="i.taskContent"
+							:style="i.inputDisplay"
+							>
+						</div>
+					</div>
 
-							<p>
-								<input type="checkbox" id="出門走走，提升士氣" value="出門走走，提升士氣" v-model="checkedTasks" @click="play_soundEffects_click01">
-								<label for="出門走走，提升士氣">出門走走，提升士氣</label>
-							</p>
-
-							<p class="act1">
-								<input type="checkbox" id="找人聊天，提升士氣" value="找人聊天，提升士氣" v-model="checkedTasks" @click="play_soundEffects_click01">
-								<label for="找人聊天，提升士氣">找人聊天，提升士氣</label>
-							</p>
-
-							<p>
-								<input type="checkbox" id="確認成就清單1/2" value="確認成就清單1/2" v-model="checkedTasks" @click="play_soundEffects_click01">
-								<label for="確認成就清單1/2">確認成就清單1/2</label>
-							</p>
-
-							<p class="act1">
-								<input type="checkbox" id="確認成就清單2/2" value="確認成就清單2/2" v-model="checkedTasks" @click="play_soundEffects_click01">
-								<label for="確認成就清單2/2">確認成就清單2/2</label>
-							</p>							
-
-							<p>
-								<input type="checkbox" id="其他任務" :value='otherTask' v-model="checkedTasks" @click="play_soundEffects_click01" placeholder="新增其他任務">
-								<!-- Bug：placeholder無法顯示 -->
-								<label for="其他任務"><input type="text" v-model="otherTask"></label>
-							</p>
-
-
-						</div>						
-					</li>
-					
-					
-					
+					<!-- 新增任務的按鈕 -->
+					<div>
+						<span
+						@click="clickPlusNewItem"
+						class="h3 listIconPlus">
+						+ 
+						</span>
+						<span :style="convertContentDisplayOfPlusItem"
+						@click="clickPlusNewItem">
+							新增任務
+						</span>
+						<input
+						id="inputFocus"
+						@blur="LeaveInputOfPlusItem"
+						v-model="newTaskContent"
+						:style="convertInputDisplayOfPlusItem"
+						>
+					</div>					
 				</ul>
+
 				</div>
 				<div class="calendar-bottom-grid">
 					<div class="calendar-bottom-gridl">
-						<a href="#" id="">按鈕1</a>
+						<a @click="testPlus">按鈕1</a>
 					</div>
 					<div class="calendar-bottom-gridl1">
 						<a href="achievementSystem.html" id="">觀看成就</a>
@@ -236,5 +244,5 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </body>
 
 <!-- 以下是我建立的JS，為了使Vue生效，放在最底下 -->
-<script type="text/javascript" src="js/index.js"></script>
+<script type="module" src="js/index.js"></script>
 </html>
