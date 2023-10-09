@@ -7,7 +7,7 @@ createApp({
         checkedTasks: [],
         allTasks: [
           {
-            taskNumber: 'uLv0sQd9zI2lEcGYKGhzv',
+            taskId: 'uLv0sQd9zI2lEcGYKGhzv',
             taskContent: '早睡早起',
             doneOrNot: 'false',
             doneTime: 'Fri Oct 06 2023 04:49:57 GMT+0800 (台北標準時間)',
@@ -17,7 +17,7 @@ createApp({
             inputDisplay: 'display: none;',
           },
           {
-            taskNumber: 'QBs1Q87gonGzsurVjPEC-',
+            taskId: 'QBs1Q87gonGzsurVjPEC-',
             taskContent: '不要熬夜',
             doneOrNot: 'true',
             doneTime: 'Fri Oct 06 2023 04:49:57 GMT+0800 (台北標準時間)',
@@ -36,7 +36,6 @@ createApp({
           'media/Star_Rail.mp3'
         ],
         backGroundMusic: '',
-        test: [0,1,2,3],
     }
   },
   computed: {
@@ -48,7 +47,6 @@ createApp({
         {
           if (i.doneOrNot) {
             count = count + 1;
-            console.log(6666666)
           }
         }
       );
@@ -122,13 +120,9 @@ createApp({
       audio.src = "media/soundEffects_click01.wav";
       audio.play();
     },
-    checkboxClicked(event) {
+    checkboxClicked(i) {
       this.playSoundEffectsClick01();
-      // var checkboxBoolin = event.target.checked;
-      // console.log(checkboxBoolin)
-      // Bug：點擊兩次才會打勾，傻眼
-      // 猜測checkbox上的v-model是原因，下次改改看
-      // this.allTasks[0].splice(2, 1, checkboxBoolin);
+      this.findTaskFromTaskId(i.taskId).doneTime = Date();
     },
     changeInputDisplayOfPlusItem() {
       this.inputDisplayOfPlusItem = !this.inputDisplayOfPlusItem;
@@ -169,7 +163,7 @@ createApp({
       this.changeInputDisplayOfPlusItem();
       this.allTasks.push(
         {
-          taskNumber: this.newTaskInputId,
+          taskId: this.newTaskInputId,
           taskContent: '新任務，點擊修改',
           doneOrNot: 'false',
           doneTime: Date(),
@@ -188,11 +182,18 @@ createApp({
     //   }
     // },
     playBackGroundMusic() {
-      console.log('播放背景樂')
       document.getElementById('backGroundMusicPlayer').play();
     },
-    testPlus() {
-      this.test.splice(0, 1)
+    // 輸入taskId找到taks物件，此物件好像是雙向綁定
+    findTaskFromTaskId(idSearched) {
+      var objectReturn
+      // 使用foeEach代替for會有bug，無法用break中斷循環，能使用throw new Error('這不是Bug，用來停止forEach')來中斷，但這會造成立刻中斷整個函數
+      for (let i = 0; i < this.allTasks.length; i++) {
+        if (this.allTasks[i].taskId == idSearched) {
+          objectReturn = this.allTasks[i];
+        }
+      }
+      return objectReturn
     },
   },
   watch: {
@@ -200,13 +201,10 @@ createApp({
     newTaskContent(newValue, oldValue) {
       // console.log(newValue)
       for (let i = 0; i < this.allTasks.length; i++) {
-        if (this.allTasks[i].taskNumber == this.newTaskInputId) {
+        if (this.allTasks[i].taskId == this.newTaskInputId) {
           this.allTasks[i].taskContent = this.newTaskContent;
         }
       }
-
-      
-
     },
     allTasks: {
       handler(newValue, oldValue) {
@@ -214,8 +212,10 @@ createApp({
         // 只要没有替换对象本身，
         // 那么这里的 `newValue` 和 `oldValue` 相同
         // 特別注意，陣列及物件多層次要用深度監視
-        console.log('使用watch，監視allTasks')
-        // 準備用來儲存本地
+        // 轉換物件為字串
+        var saveAllTasks = JSON.stringify(this.allTasks);
+        // 儲存本地
+        localStorage.setItem('allTasks', saveAllTasks)
       },
       deep: true,
     },
@@ -223,14 +223,14 @@ createApp({
   mounted() {
     var randonNumber = Math.floor(Math.random()*this.backGroundMusicList.length);
     this.backGroundMusic = this.backGroundMusicList[randonNumber];
-    console.log(this.backGroundMusic)
+    console.log('播放背景樂：', this.backGroundMusic)
   },
   updated() {
     this.allTasks.forEach((i) => 
       {
         if (i.inputDisplay == '') {
-          // console.log(document.getElementById(i.taskNumber).lastChild)
-          document.getElementById(i.taskNumber).lastChild.focus();
+          // console.log(document.getElementById(i.taskId).lastChild)
+          document.getElementById(i.taskId).lastChild.focus();
         }
       }
     );

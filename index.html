@@ -43,7 +43,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div class="smart-main" @click.once="playBackGroundMusic">
 		<h6 class="title">人生Online7.X 激勵系統 beta
 		</h6>
-		<h6 class="title">試用版，請勿輸入任何敏感資料，請只用於測試</h1>
 
 <!-- navigation -->
 		<div class="navigation">
@@ -69,7 +68,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<li class="menu__item"><a href="achievementSystem.html" class="menu__link">成就系統</a></li>
 
 								<li class="menu__item"><div class="menu__link">
-									<audio id="backGroundMusicPlayer" controls loop :src="backGroundMusic"></audio>
+									<audio id="backGroundMusicPlayer"
+									muted
+									controls
+									loop
+									:src="backGroundMusic"></audio>
 								</div></li>
 							</ul>
 						</nav>
@@ -169,10 +172,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</script>
 				<!-- 新成就清單 -->
 				<ul id="ListOfAchievement">
-					<!-- test：{{ test }}<br> -->
-					全部任務：{{ allTasks }}<br>
-					完成任務：{{ checkedTasks }}
-					<p>渲染列表</p>
 					<!-- 渲染列表 -->
 
 					<div v-for="i in allTasks">
@@ -181,7 +180,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							type="checkbox"
 							:value="i.taskNumber"
 							v-model="i.doneOrNot"
-							@click="checkboxClicked"
+							@click="checkboxClicked(i)"
 							>
 							<span
 							@click="ClickX"
@@ -221,7 +220,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 				<div class="calendar-bottom-grid">
 					<div class="calendar-bottom-gridl">
-						<a @click="testPlus">按鈕1</a>
+						<a @click="">按鈕1</a>
 					</div>
 					<div class="calendar-bottom-gridl1">
 						<a href="achievementSystem.html" id="">觀看成就</a>
@@ -234,6 +233,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="clearfix"> </div>
 	</div>
 <!-- //calender-show-more -->
+
+	全部任務：{{ allTasks }}<br>
 
 
 	<div class="footer">
