@@ -5,35 +5,15 @@ createApp({
   data() {
     return {
         checkedTasks: [],
-        allTasks: [
-          {
-            taskId: 'uLv0sQd9zI2lEcGYKGhzv',
-            taskContent: '早睡早起',
-            doneOrNot: 'false',
-            doneTime: 'Fri Oct 06 2023 04:49:57 GMT+0800 (台北標準時間)',
-            startTime: '2023/10/5/00/00',
-            endTime: '2023/10/5/23/59',
-            contentDisplay: '',
-            inputDisplay: 'display: none;',
-          },
-          {
-            taskId: 'QBs1Q87gonGzsurVjPEC-',
-            taskContent: '不要熬夜',
-            doneOrNot: 'true',
-            doneTime: 'Fri Oct 06 2023 04:49:57 GMT+0800 (台北標準時間)',
-            startTime: '2023/10/5/00/00',
-            endTime: '2023/10/5/23/59',
-            contentDisplay: '',
-            inputDisplay: 'display: none;',
-          },
-        ],
+        allTasks: [],
         otherTask: [],
         inputDisplayOfPlusItem: false,
         newTaskInputId: '0',
         newTaskContent: '',
         backGroundMusicList: [
           'media/TruE_HOYO_Mix.mp3',
-          'media/Star_Rail.mp3'
+          'media/Star_Rail.mp3',
+          'media/uneventful_night _Epic version.mp3',
         ],
         backGroundMusic: '',
     }
@@ -122,7 +102,14 @@ createApp({
     },
     checkboxClicked(i) {
       this.playSoundEffectsClick01();
-      this.findTaskFromTaskId(i.taskId).doneTime = Date();
+      console.log('列印i.doneOrNot', i.doneOrNot)
+      // 經測試這裡會先處理完本方法checkboxClicked，才會改變checkbox的布林值(doneOrNot)，導致畫面上打勾但是這裡的doneOrNot是false，所以這邊的布林值要反著看
+      if (!i.doneOrNot) {
+        console.log('打勾了，更改doneTime')
+        i.doneTime = Date();
+      }else {
+        i.doneTime = '';
+      }
     },
     changeInputDisplayOfPlusItem() {
       this.inputDisplayOfPlusItem = !this.inputDisplayOfPlusItem;
@@ -149,14 +136,7 @@ createApp({
       this.changeInputDisplayOfPlusItem();
     },
     ClickX(event) {
-      // console.log(event.target.parentNode.id);
-      // 不能刪除掉所有的allTasks，html很多地方要用他，會報錯
-      if (this.allTasks.length == 1) {
-        alert('任務清單不能為零項，會有Bug，待修復')
-        return
-      }else {
-        this.allTasks.splice(0, 1);
-      }
+      this.allTasks.splice(0, 1);
     },
     clickPlusNewItem() {
       this.newTaskInputId = nanoid()
@@ -165,8 +145,8 @@ createApp({
         {
           taskId: this.newTaskInputId,
           taskContent: '新任務，點擊修改',
-          doneOrNot: 'false',
-          doneTime: Date(),
+          doneOrNot: false,
+          doneTime: '',
           startTime: '2023/10/5/00/00',
           endTime: '2023/10/5/23/59',
           contentDisplay: '',
@@ -195,11 +175,16 @@ createApp({
       }
       return objectReturn
     },
+    clearAllLocalStorage() {
+      var clearOrNot = confirm("確認刪除所有存檔？此操作無法復原！");
+      if (clearOrNot) {
+        this.allTasks = [];
+      }
+    },
   },
   watch: {
     // 每当 newTaskContent 改变时，这个函数就会执行
     newTaskContent(newValue, oldValue) {
-      // console.log(newValue)
       for (let i = 0; i < this.allTasks.length; i++) {
         if (this.allTasks[i].taskId == this.newTaskInputId) {
           this.allTasks[i].taskContent = this.newTaskContent;
@@ -220,16 +205,49 @@ createApp({
       deep: true,
     },
   },
+  // 掛載完成Vue，所有東西準備就緒，html、vue都有了
   mounted() {
+    // 播放背景樂
     var randonNumber = Math.floor(Math.random()*this.backGroundMusicList.length);
     this.backGroundMusic = this.backGroundMusicList[randonNumber];
     console.log('播放背景樂：', this.backGroundMusic)
+
+    // 讀取本地存檔
+    var loadingLocalStorage = localStorage.getItem('allTasks');
+    if (loadingLocalStorage == null) {
+      this.allTasks = [
+        {
+          taskId: 'uLv0sQd9zI2lEcGYKGhzv',
+          taskContent: '找一件想做的事情完成',
+          doneOrNot: false, 
+          doneTime: '',
+          startTime: '2023/10/5/00/00',
+          endTime: '2023/10/5/23/59',
+          contentDisplay: '',
+          inputDisplay: 'display: none;',
+        },
+        {
+          taskId: 'QBs1Q87gonGzsurVjPEC-',
+          taskContent: '點擊"+"或"新增任務"增加新內容；點擊"口"完成任務',
+          doneOrNot: false,
+          doneTime: '',
+          startTime: '2023/10/5/00/00',
+          endTime: '2023/10/5/23/59',
+          contentDisplay: '',
+          inputDisplay: 'display: none;',
+        },
+      ]
+    }else {
+      // 將字串轉為物件後存入allTasks
+      this.allTasks = JSON.parse(loadingLocalStorage);
+    }
+    
   },
+  // 每次Vue更新模板時，有事件時
   updated() {
     this.allTasks.forEach((i) => 
       {
         if (i.inputDisplay == '') {
-          // console.log(document.getElementById(i.taskId).lastChild)
           document.getElementById(i.taskId).lastChild.focus();
         }
       }

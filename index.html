@@ -41,8 +41,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	
 <body id="app">
 	<div class="smart-main" @click.once="playBackGroundMusic">
-		<h6 class="title">人生Online7.X 激勵系統 beta
-		</h6>
+		<!-- 標題可以塞在電腦版，手機板不需要，或者合併到導覽列裡面 -->
+		<!-- <h6 class="title">人生Online7.X 激勵系統 beta
+		</h6> -->
 
 <!-- navigation -->
 		<div class="navigation">
@@ -67,9 +68,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 								<li class="menu__item"><a href="achievementSystem.html" class="menu__link">成就系統</a></li>
 
+								<li class="menu__item"><a
+									@click="clearAllLocalStorage"
+									class="menu__link">刪除存檔</a></li>
+
 								<li class="menu__item"><div class="menu__link">
 									<audio id="backGroundMusicPlayer"
-									
+									muted
 									controls
 									loop
 									:src="backGroundMusic"></audio>
@@ -143,11 +148,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				</div>
 				<div class="options">
 					<select id="country" onchange="change_country(this.value)" class="frm-field required dropdown">
-						<option value="null">選項1</option>
-						<option value="null">選項2</option>         
-						<option value="AX">選項3</option>
-						<option value="AX">選項4</option>
-						<option value="AX">選項5</option>
+						<option >今日任務</option>
+						<option value="">全部任務</option>         
+						<option value="">過去任務</option>
+						<option value="">未來任務</option>
 					</select>
 				</div>
 					<div class="clearfix"> </div>
@@ -175,7 +179,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<!-- 渲染列表 -->
 
 					<div v-for="i in allTasks">
-						<div :id="i.taskNumber">
+						<div :id="i.taskId">
 							<input
 							type="checkbox"
 							:value="i.taskNumber"
@@ -233,10 +237,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="clearfix"> </div>
 	</div>
 <!-- //calender-show-more -->
-
-	全部任務：{{ allTasks }}<br>
-
-
 	<div class="footer">
 			<p>© 2016 Smart Ui Kit. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
 	</div>
