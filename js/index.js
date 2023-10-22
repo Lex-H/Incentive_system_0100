@@ -65,13 +65,6 @@ createApp({
         return 'background:url(images/copper.png);'
       }
     },
-    // convertContentDisplay(i) {
-    //   if (i.inputDisplay) {
-    //     return 'display: none;'
-    //   }else {
-    //     return ''
-    //   }
-    // },
     convertInputDisplay(i) {
       if (i.inputDisplay) {
         return ''
@@ -92,6 +85,9 @@ createApp({
       }else {
         return 'display: none;'
       }
+    },
+    MakeContentShort() {
+      // 這裡應該監測文字內容然後把縮短後的文字內容放入ContentShort
     },
   },
   methods: {
@@ -145,10 +141,11 @@ createApp({
         {
           taskId: this.newTaskInputId,
           taskContent: '新任務，點擊修改',
+          contentShort: '',
           doneOrNot: false,
           doneTime: '',
-          startTime: '2023/10/5/00/00',
-          endTime: '2023/10/5/23/59',
+          startTime: Date(),
+          endTime: Date(),
           contentDisplay: '',
           inputDisplay: 'display: none;',
         },
@@ -219,21 +216,23 @@ createApp({
         {
           taskId: 'uLv0sQd9zI2lEcGYKGhzv',
           taskContent: '找一件想做的事情完成',
+          contentShort: '',
           doneOrNot: false, 
           doneTime: '',
-          startTime: '2023/10/5/00/00',
-          endTime: '2023/10/5/23/59',
+          startTime: Date(),
+          endTime: Date(),
           contentDisplay: '',
           inputDisplay: 'display: none;',
         },
         {
           taskId: 'QBs1Q87gonGzsurVjPEC-',
           taskContent: '點擊"+"或"新增任務"增加新內容；點擊"口"完成任務',
+          contentShort: '',
+          contentShort: '',
           doneOrNot: false,
           doneTime: '',
-          startTime: '2023/10/5/00/00',
-          endTime: '2023/10/5/23/59',
-          contentDisplay: '',
+          startTime: Date(),
+          endTime: Date(),                   
           inputDisplay: 'display: none;',
         },
       ]

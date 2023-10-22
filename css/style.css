@@ -3722,3 +3722,19 @@ button.tip {
 		width: 152px;
 	}
 }
+/* 我加的css */
+#handle {
+	position: relative;
+	left: 0.15em;
+	top: -0.125em;
+}
+.contentOfList {
+	display: inline-block;
+	width: 75%;
+	position: relative;
+	left: 0.25em;
+}
+#deleteIcon {
+	position: relative;
+	left: 0.25em;
+}

@@ -74,7 +74,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 								<li class="menu__item"><div class="menu__link">
 									<audio id="backGroundMusicPlayer"
-									
+									muted
 									controls
 									loop
 									:src="backGroundMusic"></audio>
@@ -187,17 +187,28 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							@click="checkboxClicked(i)"
 							>
 							<span
-							@click="ClickX"
-							> X </span>
-							<span :style="i.contentDisplay"
+							@click=""
+							>
+								<img id="handle" src="images/handle.svg">
+							</span>
+							<span
+							class="contentOfList"
+							:style="i.contentDisplay"
 							@click="clickListContent(i)">
 								{{ i.taskContent }}
 							</span>
 							<input
+							class="contentOfList"
 							@blur="LeaveInput(i)"
 							v-model="i.taskContent"
 							:style="i.inputDisplay"
 							>
+							<span
+							id="deleteIcon"
+							@click="ClickX"
+							>
+							<img id="handle" src="images/deleteIcon.svg">
+							</span>
 						</div>
 					</div>
 
