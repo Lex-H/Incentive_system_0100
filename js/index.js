@@ -13,7 +13,11 @@ createApp({
         backGroundMusicList: [
           'media/TruE_HOYO_Mix.mp3',
           'media/Star_Rail.mp3',
-          'media/uneventful_night _Epic version.mp3',
+          'media/uneventful_night_epic_version.mp3',
+          'media/frieren_pv _ost_beyond_journeys_end.mp3',
+          'media/jojos_bizarre_adventure.mp3',
+          'media/harry_potter_theme_song.mp3',
+          'media/electromagnetic_gun_suona.mp4',
         ],
         backGroundMusic: '',
     }
@@ -85,9 +89,6 @@ createApp({
       }else {
         return 'display: none;'
       }
-    },
-    MakeContentShort() {
-      // 這裡應該監測文字內容然後把縮短後的文字內容放入ContentShort
     },
   },
   methods: {
@@ -190,14 +191,27 @@ createApp({
     },
     allTasks: {
       handler(newValue, oldValue) {
-        // 注意：在嵌套的变更中，
-        // 只要没有替换对象本身，
-        // 那么这里的 `newValue` 和 `oldValue` 相同
+        // 注意：在嵌套的变更中，只要没有替换对象本身，那么这里的 `newValue` 和 `oldValue` 相同
         // 特別注意，陣列及物件多層次要用深度監視
+
+        // // 儲存資料到本地
         // 轉換物件為字串
         var saveAllTasks = JSON.stringify(this.allTasks);
         // 儲存本地
-        localStorage.setItem('allTasks', saveAllTasks)
+        localStorage.setItem('allTasks', saveAllTasks);
+
+        // // 確認文字內容長度然後把縮短後的文字內容放入contentShort
+        // Bug：這裡可能有效能問題，每當allTasks有任何變動都要執行一次for，應該要找出更有效能的方法
+        // Bug 中文跟英文在.length算起來一個字都算一，但是顯示在螢幕上佔用的格子不一樣，應該英文算0.5這樣才會符合我的需求
+        for (var i=0; i<this.allTasks.length; i++) {
+          if (this.allTasks[i].taskContent.length > 15){
+            this.allTasks[i].contentShort = this.allTasks[i].taskContent.substring(0, 15)
+            console.log('縮短了', this.allTasks[i].contentShort)
+          }else {
+            this.allTasks[i].contentShort = this.allTasks[i].taskContent
+            console.log('沒縮短', this.allTasks[i].contentShort)
+          }
+        }
       },
       deep: true,
     },
@@ -216,7 +230,7 @@ createApp({
         {
           taskId: 'uLv0sQd9zI2lEcGYKGhzv',
           taskContent: '找一件想做的事情完成',
-          contentShort: '',
+          contentShort: '找一件想做的事情完成',
           doneOrNot: false, 
           doneTime: '',
           startTime: Date(),
@@ -226,9 +240,18 @@ createApp({
         },
         {
           taskId: 'QBs1Q87gonGzsurVjPEC-',
-          taskContent: '點擊"+"或"新增任務"增加新內容；點擊"口"完成任務',
-          contentShort: '',
-          contentShort: '',
+          taskContent: '點擊"+"或"新增任務"增加新',
+          contentShort: '點擊"+"或"新增任務"增加新',
+          doneOrNot: false,
+          doneTime: '',
+          startTime: Date(),
+          endTime: Date(),                   
+          inputDisplay: 'display: none;',
+        },
+        {
+          taskId: '5979Wb2mZaR-fwBAzJPxu',
+          taskContent: '內容；點擊"口"完成任務',
+          contentShort: '內容；點擊"口"完成任務',
           doneOrNot: false,
           doneTime: '',
           startTime: Date(),
@@ -244,6 +267,7 @@ createApp({
   },
   // 每次Vue更新模板時，有事件時
   updated() {
+    // 改變焦點
     this.allTasks.forEach((i) => 
       {
         if (i.inputDisplay == '') {
@@ -251,7 +275,6 @@ createApp({
         }
       }
     );
-
     document.getElementById('inputFocus').focus();
   },
 }).mount('#app')
